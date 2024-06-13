@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import shop.mtcoding.bank.config.Redisconfig;
 
 @RequiredArgsConstructor
 @Controller
@@ -12,11 +14,14 @@ public class UserController {
 
     private final HttpSession session;
     private final UserService userService;
+    private final Redisconfig redisconfig;
 
     @GetMapping("/home")
     public String home(){
+        System.out.println(redisconfig);
         return "home";
     }
+
 
     @GetMapping("/logout")
     public String logout(){
