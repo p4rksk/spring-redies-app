@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import shop.mtcoding.bank.config.Redisconfig;
+import shop.mtcoding.bank.config.RedisConfig;
 
 @RequiredArgsConstructor
 @Controller
@@ -14,12 +14,19 @@ public class UserController {
 
     private final HttpSession session;
     private final UserService userService;
-    private final Redisconfig redisconfig;
+    private final RedisConfig redisconfig;
 
     @GetMapping("/home")
     public String home(){
         System.out.println(redisconfig);
         return "home";
+    }
+
+    @GetMapping("/redis/test")
+    public @ResponseBody String redisTest(){
+        User sessionUser = (User)session.getAttribute("user");
+        System.out.println("username : "+sessionUser.getUsername() );
+        return "redisTest";
     }
 
 
